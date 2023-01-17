@@ -8,9 +8,10 @@ public class Player : MonoBehaviour
 
     public float Speed;
     private bool IsGround = true;
-
+    public float MaxVelocity = 10f;
+    public float MaxAcceleration = 10f;
     public float JumpForce = 10f;
-
+    public float acceleration;
     void Start()
     {
         rb = gameObject.GetComponent<Rigidbody2D>();
@@ -28,7 +29,16 @@ public class Player : MonoBehaviour
 
     void FixedUpdate()
     {
-        transform.Translate(Vector2.right * Speed * Time.fixedDeltaTime);
+        Vector2 vel = rb.velocity;
+        float VelocityRatio = rb.velocity.x /MaxVelocity;
+        acceleration = MaxAcceleration * (1 - VelocityRatio);
+        vel.x += acceleration*Time.fixedDeltaTime;
+        if (vel.x >= MaxVelocity)
+        {
+            vel.x = MaxVelocity;
+        }
+        an.speed+=.01f*Time.fixedDeltaTime;
+        rb.velocity = vel;
     }
     void Jump()
     {
