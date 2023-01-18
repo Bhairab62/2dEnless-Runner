@@ -12,6 +12,9 @@ public class Player : MonoBehaviour
     public float MaxAcceleration = 10f;
     public float JumpForce = 10f;
     public float acceleration;
+    
+    public float DistanceToSpawn = 1f;
+    private Vector2 vel;
     void Start()
     {
         rb = gameObject.GetComponent<Rigidbody2D>();
@@ -29,7 +32,7 @@ public class Player : MonoBehaviour
 
     void FixedUpdate()
     {
-        Vector2 vel = rb.velocity;
+        vel = rb.velocity;
         float VelocityRatio = rb.velocity.x /MaxVelocity;
         acceleration = MaxAcceleration * (1 - VelocityRatio);
         vel.x += acceleration*Time.fixedDeltaTime;
@@ -50,6 +53,12 @@ public class Player : MonoBehaviour
         if (collision.collider.tag == "ground")
         {
             IsGround = true;
+        }
+        if (collision.collider.tag == "point")
+        {
+            rb.velocity = vel;
+            transform.position = new Vector3(transform.position.x + DistanceToSpawn, 0f ,0f);
+            vel = rb.velocity;
         }
     }
 }
