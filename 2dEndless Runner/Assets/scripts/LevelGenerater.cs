@@ -4,41 +4,27 @@ using UnityEngine;
 
 public class LevelGenerater : MonoBehaviour
 {
-    public Transform LevelObj;
-    public Transform LevelStart;
+    public GameObject[] Platform;
 
-    private Vector3 Level_End_Pos;
-    public Player player;
-
-    public float DistanceBetween_Level=200f;
-    // Start is called before the first frame update
-    void Awake()
+    public Transform LevelEndPoint;
+    float LevelWidth;
+    public float DistanceBetweenPoint;
+    public int RandomPlatform;
+    public Transform[] DifferentYpos;
+    public float Length;
+    private void Start()
     {
-        Level_End_Pos = LevelStart.Find("EndPos").position;
-        SpawnLevel();
-/*        int levelpartnum = 5;
-        for (int i = 0; i < levelpartnum; i++)
-        {
-            SpawnLevel();
-        }*/
+        
     }
-    void SpawnLevel()
-    {
-        Transform Level_Part_End= SpawnLevelPart(Level_End_Pos);
-        Level_End_Pos = Level_Part_End.Find("EndPos").position;
-    }
-
     private void Update()
     {
-        if (Vector3.Distance(player.transform.position, Level_End_Pos) < DistanceBetween_Level)
+        RandomPlatform = Random.Range(0, Platform.Length);
+        LevelWidth = Platform[RandomPlatform].GetComponent<SpriteRenderer>().bounds.size.x;
+        int RandomYPosition = Random.Range(0, DifferentYpos.Length);
+        if (transform.position.x < LevelEndPoint.position.x)
         {
-            SpawnLevel();
+            Instantiate(Platform[RandomPlatform],new Vector3(transform.position.x +LevelWidth + DistanceBetweenPoint,DifferentYpos[RandomYPosition].position.y,0f) ,Quaternion.identity);
+            transform.position += new Vector3(Length, 0f, 0f);
         }
-    }
-
-    private Transform SpawnLevelPart(Vector3 pos)
-    {
-        Transform Level_Part_Start=Instantiate(LevelObj, pos, Quaternion.identity);
-        return Level_Part_Start;
     }
 }
