@@ -45,7 +45,15 @@ public class Player : MonoBehaviour
     }
     void Jump()
     {
-        an.SetTrigger("jump");
+        int RandomAnimation = Random.Range(0, 2);
+        if (RandomAnimation == 0)
+        {
+            an.SetTrigger("roll");
+        }
+        else if (RandomAnimation==1)
+        {
+            an.SetTrigger("jump");
+        }
         rb.AddForce(new Vector2(0f, JumpForce), ForceMode2D.Impulse);
     }
     private void OnCollisionEnter2D(Collision2D collision)
@@ -56,6 +64,7 @@ public class Player : MonoBehaviour
         }
         if (collision.collider.tag == "point")
         {
+            Debug.Log("Restart the Game!!");
             rb.velocity = vel;
             transform.position = new Vector3(transform.position.x + DistanceToSpawn, 0f, 0f);
             vel = rb.velocity;
@@ -65,7 +74,12 @@ public class Player : MonoBehaviour
     {
         if (collision.tag == "Fire")
         {
+            an.SetTrigger("hit");
             Debug.Log("Fire!!");
+        }
+        if (collision.tag == "arrow")
+        {
+            an.SetTrigger("hit");
         }
     }
 }
