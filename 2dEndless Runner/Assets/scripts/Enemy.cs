@@ -7,14 +7,18 @@ public class Enemy : MonoBehaviour
     Rigidbody2D rb;
     Animator an;
     Transform player;
+
+    public GameObject DeathEffect;
     public float DistanceBetween;
     public Transform ShootPoint;
     public GameObject arrow;
     public float StarTime;
     private float TimeBetweenShoot;
+    private GameObject cam;
     // Start is called before the first frame update
     void Start()
     {
+        cam = GameObject.FindGameObjectWithTag("CameraParent");
         TimeBetweenShoot = StarTime;
         rb = gameObject.GetComponent<Rigidbody2D>();
         an = gameObject.GetComponent<Animator>();
@@ -42,5 +46,15 @@ public class Enemy : MonoBehaviour
     private void FixedUpdate()
     {
         
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.tag == "Player")
+        {
+            Debug.Log("Destroy Enemy!!");
+            cam.gameObject.GetComponent<Animator>().SetTrigger("shake");
+            Instantiate(DeathEffect, transform.position, Quaternion.identity);
+            Destroy(gameObject);
+        }
     }
 }

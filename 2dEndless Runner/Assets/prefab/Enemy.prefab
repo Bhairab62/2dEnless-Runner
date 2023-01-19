@@ -66,7 +66,7 @@ Transform:
   m_Children:
   - {fileID: 4511216950177958463}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &4511216951064218486
 SpriteRenderer:
@@ -155,7 +155,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -196,10 +196,10 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.17858815, y: -0.010256767}
+  m_Offset: {x: -0.17858815, y: 0.05879414}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -210,7 +210,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.44561052, y: 1.1526504}
+  m_Size: {x: 0.44561052, y: 1.0145485}
   m_EdgeRadius: 0
 --- !u!114 &4511216951064218484
 MonoBehaviour:
@@ -224,6 +224,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed61a1101962ddf4eb2802b268734102, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DeathEffect: {fileID: 2951238541434086778, guid: ef3e65fcafe5f69488f5e70a83a5f1a0, type: 3}
   DistanceBetween: 9.5
   ShootPoint: {fileID: 4511216950177958463}
   arrow: {fileID: 2052474032122756259, guid: f83cea37ba067db43b994e8fa459474b, type: 3}

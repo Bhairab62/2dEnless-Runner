@@ -6,10 +6,12 @@ public class Arrow : MonoBehaviour
 {
     Rigidbody2D rb;
     public float speedArrow=10f;
+    public GameObject Hiteffect;
     // Start is called before the first frame update
     void Start()
     {
         rb = gameObject.GetComponent<Rigidbody2D>();
+        Destroy(gameObject, 10f);
     }
     void Update()
     {
@@ -20,7 +22,9 @@ public class Arrow : MonoBehaviour
     {
         if (collision.tag == "Player")
         {
+            Instantiate(Hiteffect, collision.transform.position, Quaternion.identity);
             Debug.Log("Player Health Alert!!");
+            Destroy(gameObject);
         }
     }
 }
