@@ -8,6 +8,7 @@ TagManager:
   - point
   - arrow
   - CameraParent
+  - Fire
   layers:
   - Default
   - TransparentFX

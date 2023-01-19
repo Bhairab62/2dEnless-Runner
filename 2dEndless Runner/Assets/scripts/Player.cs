@@ -56,12 +56,16 @@ public class Player : MonoBehaviour
         }
         if (collision.collider.tag == "point")
         {
-            vel = rb.velocity;
-            float VelocityRatio = rb.velocity.x / MaxVelocity;
-            acceleration = MaxAcceleration * (1 - VelocityRatio);
-            vel.x += acceleration * Time.fixedDeltaTime;
             rb.velocity = vel;
             transform.position = new Vector3(transform.position.x + DistanceToSpawn, 0f, 0f);
+            vel = rb.velocity;
+        }
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.tag == "Fire")
+        {
+            Debug.Log("Fire!!");
         }
     }
 }
