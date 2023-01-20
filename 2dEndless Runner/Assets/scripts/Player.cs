@@ -12,7 +12,8 @@ public class Player : MonoBehaviour
     public float MaxAcceleration = 10f;
     public float JumpForce = 10f;
     public float acceleration;
-    
+    //public float time;
+
     public float DistanceToSpawn = 1f;
     private Vector2 vel;
     void Start()
@@ -23,6 +24,7 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //Debug.Log("Pintu");
         if (Input.GetKeyDown(KeyCode.Space) && IsGround)
         {
             Jump();

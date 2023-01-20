@@ -10,6 +10,7 @@ TagManager:
   - CameraParent
   - Fire
   - coin
+  - key
   layers:
   - Default
   - TransparentFX

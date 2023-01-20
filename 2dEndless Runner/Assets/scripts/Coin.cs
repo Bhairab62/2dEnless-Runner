@@ -21,6 +21,7 @@ public class Coin : MonoBehaviour
     {
         if (collision.tag == "Player")
         {
+            FindObjectOfType<CoinText>().CoinCollected += 1;
             StartCoroutine(Des());
         }
     }

@@ -23,7 +23,6 @@ public class Arrow : MonoBehaviour
         if (collision.tag == "Player")
         {
             Instantiate(Hiteffect, collision.transform.position, Quaternion.identity);
-            Debug.Log("Player Health Alert!!");
             Destroy(gameObject);
         }
     }

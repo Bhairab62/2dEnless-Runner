@@ -51,7 +51,6 @@ public class Enemy : MonoBehaviour
     {
         if (collision.tag == "Player")
         {
-            Debug.Log("Destroy Enemy!!");
             cam.gameObject.GetComponent<Animator>().SetTrigger("shake");
             Instantiate(DeathEffect, transform.position, Quaternion.identity);
             Destroy(gameObject);
