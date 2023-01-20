@@ -11,6 +11,7 @@ TagManager:
   - Fire
   - coin
   - key
+  - heart
   layers:
   - Default
   - TransparentFX

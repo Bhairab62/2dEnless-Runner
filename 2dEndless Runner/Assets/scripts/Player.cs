@@ -1,10 +1,12 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
     Rigidbody2D rb;
     Animator an;
+    public Text HeartText;
 
     public float Speed;
     private bool IsGround = true;
@@ -14,10 +16,13 @@ public class Player : MonoBehaviour
     public float acceleration;
     //public float time;
 
+    public int MaxHealth;
+    public int CurrentHealth;
     public float DistanceToSpawn = 1f;
     private Vector2 vel;
     void Start()
     {
+        CurrentHealth = MaxHealth;
         rb = gameObject.GetComponent<Rigidbody2D>();
         an = gameObject.GetComponent<Animator>();
     }
@@ -66,7 +71,7 @@ public class Player : MonoBehaviour
         }
         if (collision.collider.tag == "point")
         {
-            Debug.Log("Restart the Game!!");
+            TakeDamage(1);
             rb.velocity = vel;
             transform.position = new Vector3(transform.position.x + DistanceToSpawn, 0f, 0f);
             vel = rb.velocity;
@@ -76,12 +81,27 @@ public class Player : MonoBehaviour
     {
         if (collision.tag == "Fire")
         {
-            an.SetTrigger("hit");
+            TakeDamage(1);
             Debug.Log("Fire!!");
         }
         if (collision.tag == "arrow")
         {
+            TakeDamage(1);
             an.SetTrigger("hit");
         }
+    }
+    void TakeDamage(int damage)
+    {
+        MaxHealth -= damage;
+        CurrentHealth = MaxHealth;
+        HeartText.text = MaxHealth.ToString();
+        if (MaxHealth <= 0)
+        {
+            Die();
+        }
+    }
+    void Die()
+    {
+        Debug.Log("Player Has Zero Health!!");
     }
 }

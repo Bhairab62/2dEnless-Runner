@@ -16,6 +16,7 @@ public class Key : MonoBehaviour
     {
         if (other.tag == "Player")
         {
+            FindObjectOfType<KeyText>().CurrentKeyNum += 1;
             StartCoroutine(DestroyThisKey());
         }
     }

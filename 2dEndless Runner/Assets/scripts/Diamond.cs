@@ -1,9 +1,11 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Diamond : MonoBehaviour
 {
     public float time;
+    //public Text JemsText;
     Animator an;
     private void Start()
     {
@@ -13,12 +15,13 @@ public class Diamond : MonoBehaviour
     {
         if (collision.tag == "Player")
         {
+            FindObjectOfType<JemsText>().JemsCollected += 1;
             StartCoroutine(DestroyDiamond());
         }
     }
     IEnumerator DestroyDiamond()
     {
-        an.SetTrigger("collect");//Debug.Log("Diamond Bucket adding one to!!");
+        an.SetTrigger("collect");
         yield return new WaitForSeconds(time);
         Destroy(gameObject);
     }
