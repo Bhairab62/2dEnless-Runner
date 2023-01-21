@@ -1,27 +1,30 @@
 using System.Collections;
-using System.Collections.Generic;
+using UnityEngine.UI;
 using UnityEngine;
 
 public class Coin : MonoBehaviour
 {
     public float time;
     Animator an;
+    //private int Totalcoin;
+    private Text coinText;
     // Start is called before the first frame update
     void Start()
     {
+        coinText = GameObject.FindGameObjectWithTag("coinText").GetComponent<Text>();
+        coinText.text=PlayerPrefs.GetInt("coin", 0).ToString();
         an = gameObject.GetComponent<Animator>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag == "Player")
         {
             FindObjectOfType<CoinText>().CoinCollected += 1;
+            if (FindObjectOfType<CoinText>().CoinCollected > PlayerPrefs.GetInt("coin", 0))
+            {
+                PlayerPrefs.SetInt("coin", FindObjectOfType<CoinText>().CoinCollected);
+            }
             StartCoroutine(Des());
         }
     }

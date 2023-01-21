@@ -7,8 +7,11 @@ public class Diamond : MonoBehaviour
     public float time;
     //public Text JemsText;
     Animator an;
+    private Text jemsText;
     private void Start()
     {
+        jemsText = GameObject.FindGameObjectWithTag("jemsText").GetComponent<Text>();
+        jemsText.text = PlayerPrefs.GetInt("jems",0).ToString();
         an = gameObject.GetComponent<Animator>();
     }
     private void OnTriggerEnter2D(Collider2D collision)
@@ -16,6 +19,10 @@ public class Diamond : MonoBehaviour
         if (collision.tag == "Player")
         {
             FindObjectOfType<JemsText>().JemsCollected += 1;
+            if (FindObjectOfType<JemsText>().JemsCollected > PlayerPrefs.GetInt("jems", 0))
+            {
+                PlayerPrefs.SetInt("jems", FindObjectOfType<JemsText>().JemsCollected);
+            }   
             StartCoroutine(DestroyDiamond());
         }
     }

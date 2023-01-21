@@ -10,10 +10,12 @@ TagManager:
   - CameraParent
   - Fire
   - coin
-  - key
   - heart
   - img
   - fl
+  - coinText
+  - jemsText
+  - keyPoint
   layers:
   - Default
   - TransparentFX
