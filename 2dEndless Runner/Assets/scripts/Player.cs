@@ -7,6 +7,7 @@ public class Player : MonoBehaviour
     Rigidbody2D rb;
     Animator an;
     public Text HeartText;
+    public Animator Uian;
 
     public float Speed;
     private bool IsGround = true;
@@ -29,7 +30,6 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //Debug.Log("Pintu");
         if (Input.GetKeyDown(KeyCode.Space) && IsGround)
         {
             Jump();
@@ -39,16 +39,14 @@ public class Player : MonoBehaviour
 
     void FixedUpdate()
     {
-        vel = rb.velocity;
-        float VelocityRatio = rb.velocity.x /MaxVelocity;
-        acceleration = MaxAcceleration * (1 - VelocityRatio);
-        vel.x += acceleration*Time.fixedDeltaTime;
-        if (vel.x >= MaxVelocity)
+        if (MaxHealth != 0)
         {
-            vel.x = MaxVelocity;
+            PlayerSpeed();
         }
-        an.speed+=.01f*Time.fixedDeltaTime;
-        rb.velocity = vel;
+        else
+        {
+            return;
+        }
     }
     void Jump()
     {
@@ -95,21 +93,36 @@ public class Player : MonoBehaviour
         MaxHealth -= damage;
         CurrentHealth = MaxHealth;
         HeartText.text = MaxHealth.ToString();
-        if (MaxHealth <= 0)
+        if (MaxHealth <= 0f)
         {
-            Die(.3f);
+            Die();
         }
     }
-    void Die(float time)
+    void Die()
     {
-        Debug.Log("Player Has Zero Health!!");
-        StartCoroutine(Wait(time));
+        StartCoroutine(Wait());
     }
-    IEnumerator Wait(float time)
+    IEnumerator Wait()
     {
         GameObject.FindGameObjectWithTag("fl").GetComponent<Animator>().SetTrigger("flash");
-        yield return new WaitForSeconds(time);
-        Time.timeScale = 0f;
-        Debug.Log("Setting time back or!!");
+        Uian.SetTrigger("ui");
+        yield return new WaitForSeconds(.1f);
+        rb.velocity =vel;
+        vel.x = 0f;
+        rb.velocity = vel;
+        Debug.Log("Player Has Died!!");
+    }
+    void PlayerSpeed()
+    {
+        vel = rb.velocity;
+        float VelocityRatio = rb.velocity.x / MaxVelocity;
+        acceleration = MaxAcceleration * (1 - VelocityRatio);
+        vel.x += acceleration * Time.fixedDeltaTime;
+        if (vel.x >= MaxVelocity)
+        {
+            vel.x = MaxVelocity;
+        }
+        an.speed += .01f * Time.fixedDeltaTime;
+        rb.velocity = vel;
     }
 }

@@ -9,7 +9,7 @@ public class LevelGenerater : MonoBehaviour
     public Transform LevelEndPoint;
     float LevelWidth;
     public float DistanceBetweenPoint;
-    public int RandomPlatform;
+    [HideInInspector]public int RandomPlatform;
     public Transform[] DifferentYpos;
     public float Length;
     private void Start()

@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 
 public class SceneManageMent : MonoBehaviour
 {
-    public GameObject img;
+    [HideInInspector]public GameObject img;
     private void Start()
     {
         img = GameObject.FindGameObjectWithTag("img");
@@ -25,5 +25,14 @@ public class SceneManageMent : MonoBehaviour
         img.GetComponent<Animator>().SetTrigger("fade");
         yield return new WaitForSeconds(.8f);
         SceneManager.LoadScene("SampleScene");
+    }
+    public void RestartButton()
+    {
+        SceneManager.LoadScene("SampleScene");
+    }
+    public void HomeButton()
+    {
+        Debug.Log("Menu");
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
     }
 }

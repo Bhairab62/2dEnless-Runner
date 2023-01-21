@@ -12,6 +12,8 @@ public class HighScoreText : MonoBehaviour
     }
     private void FixedUpdate()
     {
+        if (FindObjectOfType<Player>().MaxHealth <= 0)
+            return;
         CurrentHighNumber += 1;
     }
 }
