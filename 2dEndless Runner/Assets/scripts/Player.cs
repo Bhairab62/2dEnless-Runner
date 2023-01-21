@@ -97,11 +97,19 @@ public class Player : MonoBehaviour
         HeartText.text = MaxHealth.ToString();
         if (MaxHealth <= 0)
         {
-            Die();
+            Die(.3f);
         }
     }
-    void Die()
+    void Die(float time)
     {
         Debug.Log("Player Has Zero Health!!");
+        StartCoroutine(Wait(time));
+    }
+    IEnumerator Wait(float time)
+    {
+        GameObject.FindGameObjectWithTag("fl").GetComponent<Animator>().SetTrigger("flash");
+        yield return new WaitForSeconds(time);
+        Time.timeScale = 0f;
+        Debug.Log("Setting time back or!!");
     }
 }

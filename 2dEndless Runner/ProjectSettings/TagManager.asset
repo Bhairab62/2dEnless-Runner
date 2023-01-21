@@ -12,6 +12,8 @@ TagManager:
   - coin
   - key
   - heart
+  - img
+  - fl
   layers:
   - Default
   - TransparentFX
